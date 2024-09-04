@@ -1,25 +1,21 @@
 ﻿using System;
 
-public class Product
+public class Accessotion
 {
     private int id;
     private string name;
-    private int categoryId;
 
     public int Id { get => id; set => id = value; }
     public string Name { get => name; set => name = value; }
-    public int CategoryId { get => categoryId; set => categoryId = value; }
 
-    public Product()
+    public Accessotion()
     {
     }
 
-    public Product(int id, string name, int categoryId)
+    public Accessotion(int id, string name)
     {
         this.id = id;
         this.name = name;
-        this.categoryId = categoryId;
     }
-    
 }
 
