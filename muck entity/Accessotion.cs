@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class Accessotion : Base
+public class Accessotion : BaseRow
 {
     public Accessotion()
     {

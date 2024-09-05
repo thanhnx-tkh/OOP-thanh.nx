@@ -30,7 +30,7 @@ public class Database
         }
     }
 
-    public void InsertTable(Entity name, Base row)
+    public void InsertTable(Entity name, BaseRow row)
     {
         switch (name)
         {
@@ -48,9 +48,9 @@ public class Database
         }
     }
 
-    public List<object> SelectTable(Entity name)
+    public List<BaseRow> SelectTable(Entity name)
     {
-        List<object> listObj = new List<object>();
+        List<BaseRow> listObj = new List<BaseRow>();
         switch (name)
         {
             case Entity.product:
@@ -68,7 +68,7 @@ public class Database
         return listObj;
     }
 
-    public void UpdateTable(Entity name, Base row)
+    public void UpdateTable(Entity name, BaseRow row)
     {
         switch (name)
         {
@@ -113,7 +113,7 @@ public class Database
         }
     }
 
-    public bool DeleteTable(Entity name, Base row)
+    public bool DeleteTable(Entity name, BaseRow row)
     {
         switch (name)
         {
@@ -176,7 +176,7 @@ public class Database
         }
     }
 
-    public void UpdateTableById(int id, Base row)
+    public void UpdateTableById(int id, BaseRow row)
     {
         if (row is Product)
         {
@@ -223,7 +223,7 @@ public class Database
         }
     }
 
-    public void initDatabase()
+    public void InitDatabase()
     {
         for (int i = 1; i <= 10; i++)
         {

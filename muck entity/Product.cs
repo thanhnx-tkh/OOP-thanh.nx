@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class Product : Base
+public class Product : BaseRow
 {
     public int CategoryId { get; set; }
 

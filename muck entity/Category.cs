@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class Category: Base
+public class Category: BaseRow
 {
     public Category()
     {

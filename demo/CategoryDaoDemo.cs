@@ -1,54 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class DatabaseDemo
+public class CategoryDaoDemo
 {
     private Database db;
+    private CategoryDAO categoryDAO = new CategoryDAO();
 
-    public DatabaseDemo()
+    public CategoryDaoDemo()
     {
         db = Database.Instance;
-        InitDatabase();
+        db.InitDatabase();
     }
 
-    public void insertTableTest()
+    public void InsertTest()
     {
-        db.InsertTable(Entity.product, new Product(11, "Product 11", 1));
+        categoryDAO.Insert(new Category(11, "Product 11"));
     }
 
-    public void selectTableTest()
+    public void UpdateTest()
     {
-        List<Product> products = db.SelectTable(Entity.product).ConvertAll(obj => (Product)obj);
-        foreach (var item in products)
+        categoryDAO.Update(new Category(11, "Product 110000"));
+    }
+
+    public void DeleteTest()
+    {
+        categoryDAO.Delete(new Category(11, ""));
+    }
+
+    public void FindArrayTest()
+    {
+        List<BaseRow> categories = categoryDAO.FindAll();
+        foreach (Category item in categories)
         {
-            Console.WriteLine($"Product Id: {item.Id}");
-            Console.WriteLine($"Product Name: {item.Name}");
-            Console.WriteLine($"Product Category Id: {item.CategoryId}");
+            Console.WriteLine($"category Id: {item.Id}");
+            Console.WriteLine($"category Name: {item.Name}");
         }
     }
 
-    public void updateTableTest()
+    public void FindByIdTest()
     {
-        db.UpdateTableById(2, new Product(1, "Updated Product", 99));
-    }
-
-    public void deleteTableTest()
-    {
-        db.DeleteTable(Entity.product, new Product { Id = 1 });
-    }
-
-    public void truncateTableTest()
-    {
-        db.TruncateTable(Entity.product);
-    }
-
-    public void InitDatabase()
-    {
-        for (int i = 1; i <= 10; i++)
+        Category category = categoryDAO.FindById(1);
+        if (category != null)
         {
-            db.InsertTable(Entity.product, new Product(i, $"Product {i}", i));
-            db.InsertTable(Entity.category, new Category(i, $"Category {i}"));
-            db.InsertTable(Entity.accessotion, new Accessotion(i, $"Accessotion {i}"));
+            Console.WriteLine($"category Id: {category.Id}");
+            Console.WriteLine($"category Name: {category.Name}");
+        }
+        else
+        {
+            Console.WriteLine("Không tìm thấy");
         }
     }
 
@@ -58,17 +57,15 @@ public class DatabaseDemo
         {
             case Entity.product:
                 List<Product> products = db.SelectTable(Entity.product).ConvertAll(obj => (Product)obj);
-
                 foreach (var item in products)
                 {
                     Console.WriteLine($"Product Id: {item.Id}");
                     Console.WriteLine($"Product Name: {item.Name}");
-                    Console.WriteLine($"Product Category Id: {item.CategoryId}");
+                    Console.WriteLine($"Product Product Id: {item.CategoryId}");
                 }
                 break;
             case Entity.category:
                 List<Category> categories = db.SelectTable(Entity.category).ConvertAll(obj => (Category)obj);
-
                 foreach (var item in categories)
                 {
                     Console.WriteLine($"Category Id: {item.Id}");
@@ -77,7 +74,6 @@ public class DatabaseDemo
                 break;
             case Entity.accessotion:
                 List<Accessotion> accessotions = db.SelectTable(Entity.accessotion).ConvertAll(obj => (Accessotion)obj);
-
                 foreach (var item in accessotions)
                 {
                     Console.WriteLine($"Accessotion Id: {item.Id}");
@@ -88,6 +84,7 @@ public class DatabaseDemo
                 throw new ArgumentException("Tên bảng ko đúng");
         }
     }
+
     public void printAllTableTest()
     {
         printTableTest(Entity.product);
@@ -95,18 +92,17 @@ public class DatabaseDemo
         printTableTest(Entity.category);
         Console.WriteLine("-------------------------------");
         printTableTest(Entity.accessotion);
-
     }
 
     //public static void Main(string[] args)
     //{
-    //    DatabaseDemo demo = new DatabaseDemo();
-    //    demo.InsertTableTest();
-    //    //demo.selectTableTest();
-    //    //demo.updateTableTest();
-    //    //demo.deleteTableTest();
-    //    //demo.truncateTableTest();
-    //    demo.printAllTableTest();
+    //    CategoryDaoDemo categoryDaoDemo = new CategoryDaoDemo();
+    //    categoryDaoDemo.InsertTest();
+    //    categoryDaoDemo.UpdateTest();
+    //    categoryDaoDemo.DeleteTest();
+    //    categoryDaoDemo.FindArrayTest();
+    //    categoryDaoDemo.FindByIdTest();
+    //    categoryDaoDemo.printAllTableTest();
     //    Console.ReadLine();
     //}
 }
