@@ -10,13 +10,9 @@ public enum Entity
 
 public class Database
 {
-    private List<Product> productTable = new List<Product>();
-    private List<Category> categoryTable = new List<Category>();
-    private List<Accessotion> accessotionTable = new List<Accessotion>();
-
-    public List<Product> ProductTable { get => productTable; set => productTable = value; }
-    public List<Category> CategoryTable { get => categoryTable; set => categoryTable = value; }
-    public List<Accessotion> AccessotionTable { get => accessotionTable; set => accessotionTable = value; }
+    public List<Product> ProductTable { get; set; } = new List<Product>();
+    public List<Category> CategoryTable { get; set; } = new List<Category>();
+    public List<Accessotion> AccessotionTable { get; set; } = new List<Accessotion>();
 
     private static Database instance;
 
@@ -32,48 +28,39 @@ public class Database
             }
             return instance;
         }
-     
     }
 
-    public void InsertTable(Entity name, object row)
+    public void InsertTable(Entity name, Base row)
     {
         switch (name)
         {
             case Entity.product:
-                ProductTable.Add(row as Product);
+                ProductTable.Add((Product)row);
                 break;
             case Entity.category:
-                CategoryTable.Add(row as Category);
+                CategoryTable.Add((Category)row);
                 break;
             case Entity.accessotion:
-                AccessotionTable.Add(row as Accessotion);
+                AccessotionTable.Add((Accessotion)row);
                 break;
             default:
                 throw new ArgumentException("Tên bảng ko đúng");
         }
     }
+
     public List<object> SelectTable(Entity name)
     {
         List<object> listObj = new List<object>();
         switch (name)
         {
             case Entity.product:
-                foreach (var item in ProductTable)
-                {
-                    listObj.Add(item);
-                }
+                listObj.AddRange(ProductTable);
                 break;
             case Entity.category:
-                foreach (var item in CategoryTable)
-                {
-                    listObj.Add(item);
-                }
+                listObj.AddRange(CategoryTable);
                 break;
             case Entity.accessotion:
-                foreach (var item in AccessotionTable)
-                {
-                    listObj.Add(item);
-                }
+                listObj.AddRange(AccessotionTable);
                 break;
             default:
                 throw new ArgumentException("Tên bảng ko đúng");
@@ -81,12 +68,12 @@ public class Database
         return listObj;
     }
 
-    public void UpdateTable(Entity name, object row)
+    public void UpdateTable(Entity name, Base row)
     {
         switch (name)
         {
             case Entity.product:
-                Product product = row as Product;
+                Product product = (Product)row;
                 for (int i = 0; i < ProductTable.Count; i++)
                 {
                     if (ProductTable[i].Id == product.Id)
@@ -98,7 +85,7 @@ public class Database
                 throw new ArgumentException("Product ko tồn tại");
 
             case Entity.category:
-                Category category = row as Category;
+                Category category = (Category)row;
                 for (int i = 0; i < CategoryTable.Count; i++)
                 {
                     if (CategoryTable[i].Id == category.Id)
@@ -110,7 +97,7 @@ public class Database
                 throw new ArgumentException("Category ko tồn tại");
 
             case Entity.accessotion:
-                Accessotion accessotion = row as Accessotion;
+                Accessotion accessotion = (Accessotion)row;
                 for (int i = 0; i < AccessotionTable.Count; i++)
                 {
                     if (AccessotionTable[i].Id == accessotion.Id)
@@ -126,12 +113,12 @@ public class Database
         }
     }
 
-    public bool DeleteTable(Entity name, object row)
+    public bool DeleteTable(Entity name, Base row)
     {
         switch (name)
         {
             case Entity.product:
-                Product product = row as Product;
+                Product product = (Product)row;
                 for (int i = ProductTable.Count - 1; i >= 0; i--)
                 {
                     if (ProductTable[i].Id == product.Id)
@@ -143,7 +130,7 @@ public class Database
                 return false;
 
             case Entity.category:
-                Category category = row as Category;
+                Category category = (Category)row;
                 for (int i = CategoryTable.Count - 1; i >= 0; i--)
                 {
                     if (CategoryTable[i].Id == category.Id)
@@ -155,7 +142,7 @@ public class Database
                 return false;
 
             case Entity.accessotion:
-                Accessotion accessotion = row as Accessotion;
+                Accessotion accessotion = (Accessotion)row;
                 for (int i = AccessotionTable.Count - 1; i >= 0; i--)
                 {
                     if (AccessotionTable[i].Id == accessotion.Id)
@@ -189,12 +176,11 @@ public class Database
         }
     }
 
-    public void UpdateTableById(int id, object row)
+    public void UpdateTableById(int id, Base row)
     {
-        
-        if(row is Product)
+        if (row is Product)
         {
-            Product product = row as Product;
+            Product product = (Product)row;
             for (int i = 0; i < ProductTable.Count; i++)
             {
                 if (ProductTable[i].Id == id)
@@ -204,14 +190,15 @@ public class Database
                 }
             }
             throw new ArgumentException("Product ko tồn tại");
-        }else if (row is Category)
+        }
+        else if (row is Category)
         {
-            Category category = row as Category;
-            for (int i = CategoryTable.Count - 1; i >= 0; i--)
+            Category category = (Category)row;
+            for (int i = 0; i < CategoryTable.Count; i++)
             {
                 if (CategoryTable[i].Id == id)
                 {
-                    CategoryTable.RemoveAt(i);
+                    CategoryTable[i] = category;
                     return;
                 }
             }
@@ -219,7 +206,7 @@ public class Database
         }
         else if (row is Accessotion)
         {
-            Accessotion accessotion = row as Accessotion;
+            Accessotion accessotion = (Accessotion)row;
             for (int i = 0; i < AccessotionTable.Count; i++)
             {
                 if (AccessotionTable[i].Id == id)

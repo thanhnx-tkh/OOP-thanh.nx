@@ -12,20 +12,17 @@ public class DatabaseDemo
     }
 
     public void insertTableTest()
-    { 
+    {
         db.InsertTable(Entity.product, new Product(11, "Product 11", 1));
     }
 
     public void selectTableTest()
     {
         List<object> products = db.SelectTable(Entity.product);
-
     }
 
     public void updateTableTest()
     {
-        //db.UpdateTable("product", new Product(1, "Updated Product", 2));
-
         db.UpdateTableById(2, new Product(1, "Updated Product", 99));
     }
 
@@ -48,6 +45,7 @@ public class DatabaseDemo
             db.InsertTable(Entity.accessotion, new Accessotion(i, $"Accessotion {i}"));
         }
     }
+
     public void printTableTest(Entity name)
     {
         switch (name)
@@ -96,13 +94,13 @@ public class DatabaseDemo
 
     public static void Main(string[] args)
     {
-        //DatabaseDemo demo = new DatabaseDemo();
-        ////demo.insertTableTest();
-        ////demo.selectTableTest();
-        ////demo.updateTableTest();
-        ////demo.deleteTableTest();
-        ////demo.truncateTableTest();
-        //demo.printAllTableTest();
-        //Console.ReadLine();
+        DatabaseDemo demo = new DatabaseDemo();
+        demo.insertTableTest();
+        //demo.selectTableTest();
+        //demo.updateTableTest();
+        //demo.deleteTableTest();
+        //demo.truncateTableTest();
+        demo.printAllTableTest();
+        Console.ReadLine();
     }
 }
