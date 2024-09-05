@@ -6,9 +6,9 @@ public class Product
     private string name;
     private int categoryId;
 
-    public int Id { get => id; set => id = value; }
-    public string Name { get => name; set => name = value; }
-    public int CategoryId { get => categoryId; set => categoryId = value; }
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int CategoryId { get; set; }
 
     public Product()
     {

@@ -13,36 +13,39 @@ public class DatabaseDemo
 
     public void insertTableTest()
     { 
-        db.InsertTable("product", new Product(11, "Product 11", 1));
+        db.InsertTable(Entity.product, new Product(11, "Product 11", 1));
     }
 
     public void selectTableTest()
     {
-        List<object> products = db.SelectTable("product");
+        List<object> products = db.SelectTable(Entity.product);
+
     }
 
     public void updateTableTest()
     {
-        db.UpdateTable("product", new Product(1, "Updated Product", 2));
+        //db.UpdateTable("product", new Product(1, "Updated Product", 2));
+
+        db.UpdateTableById(2, new Product(1, "Updated Product", 99));
     }
 
     public void deleteTableTest()
     {
-        db.DeleteTable("product", new Product { Id = 1 });
+        db.DeleteTable(Entity.product, new Product { Id = 1 });
     }
 
     public void truncateTableTest()
     {
-        db.TruncateTable("product");
+        db.TruncateTable(Entity.product);
     }
 
     public void initDatabase()
     {
         for (int i = 1; i <= 10; i++)
         {
-            db.InsertTable("product", new Product(i, $"Product {i}", i));
-            db.InsertTable("category", new Category(i, $"Category {i}"));
-            db.InsertTable("accessotion", new Accessotion(i, $"Accessotion {i}"));
+            db.InsertTable(Entity.product, new Product(i, $"Product {i}", i));
+            db.InsertTable(Entity.category, new Category(i, $"Category {i}"));
+            db.InsertTable(Entity.accessotion, new Accessotion(i, $"Accessotion {i}"));
         }
     }
     public void printTableTest(string name)
@@ -50,7 +53,7 @@ public class DatabaseDemo
         switch (name)
         {
             case "product":
-                List<Product> products = db.SelectTable("product").ConvertAll(obj => (Product)obj);
+                List<Product> products = db.SelectTable(Entity.product).ConvertAll(obj => (Product)obj);
 
                 foreach (var item in products)
                 {
@@ -60,7 +63,7 @@ public class DatabaseDemo
                 }
                 break;
             case "category":
-                List<Category> categories = db.SelectTable("category").ConvertAll(obj => (Category)obj);
+                List<Category> categories = db.SelectTable(Entity.category).ConvertAll(obj => (Category)obj);
 
                 foreach (var item in categories)
                 {
@@ -69,7 +72,7 @@ public class DatabaseDemo
                 }
                 break;
             case "accessotion":
-                List<Accessotion> accessotions = db.SelectTable("accessotion").ConvertAll(obj => (Accessotion)obj);
+                List<Accessotion> accessotions = db.SelectTable(Entity.accessotion).ConvertAll(obj => (Accessotion)obj);
 
                 foreach (var item in accessotions)
                 {
@@ -91,15 +94,15 @@ public class DatabaseDemo
 
     }
 
-    //public static void Main(string[] args)
-    //{
-    //    DatabaseDemo demo = new DatabaseDemo();
-    //    demo.insertTableTest();
-    //    demo.selectTableTest();
-    //    demo.updateTableTest();
-    //    demo.deleteTableTest();
-    //    demo.truncateTableTest();
-    //    demo.printAllTableTest();
-    //    Console.ReadLine();
-    //}
+    public static void Main(string[] args)
+    {
+        //DatabaseDemo demo = new DatabaseDemo();
+        ////demo.insertTableTest();
+        ////demo.selectTableTest();
+        ////demo.updateTableTest();
+        ////demo.deleteTableTest();
+        ////demo.truncateTableTest();
+        //demo.printAllTableTest();
+        //Console.ReadLine();
+    }
 }

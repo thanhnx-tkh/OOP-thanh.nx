@@ -1,11 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 
+public enum Entity
+{
+    product,
+    category,
+    accessotion
+}
+
 public class Database
 {
     private List<Product> productTable = new List<Product>();
     private List<Category> categoryTable = new List<Category>();
     private List<Accessotion> accessotionTable = new List<Accessotion>();
+
+    public List<Product> ProductTable { get => productTable; set => productTable = value; }
+    public List<Category> CategoryTable { get => categoryTable; set => categoryTable = value; }
+    public List<Accessotion> AccessotionTable { get => accessotionTable; set => accessotionTable = value; }
+
     private static Database instance;
 
     private Database() { }
@@ -23,42 +35,42 @@ public class Database
      
     }
 
-    public void InsertTable(string name, object row)
+    public void InsertTable(Entity name, object row)
     {
         switch (name)
         {
-            case "product":
-                productTable.Add(row as Product);
+            case Entity.product:
+                ProductTable.Add(row as Product);
                 break;
-            case "category":
-                categoryTable.Add(row as Category);
+            case Entity.category:
+                CategoryTable.Add(row as Category);
                 break;
-            case "accessotion":
-                accessotionTable.Add(row as Accessotion);
+            case Entity.accessotion:
+                AccessotionTable.Add(row as Accessotion);
                 break;
             default:
                 throw new ArgumentException("Tên bảng ko đúng");
         }
     }
-    public List<object> SelectTable(string name)
+    public List<object> SelectTable(Entity name)
     {
         List<object> listObj = new List<object>();
         switch (name)
         {
-            case "product":
-                foreach (var item in productTable)
+            case Entity.product:
+                foreach (var item in ProductTable)
                 {
                     listObj.Add(item);
                 }
                 break;
-            case "category":
-                foreach (var item in categoryTable)
+            case Entity.category:
+                foreach (var item in CategoryTable)
                 {
                     listObj.Add(item);
                 }
                 break;
-            case "accessotion":
-                foreach (var item in accessotionTable)
+            case Entity.accessotion:
+                foreach (var item in AccessotionTable)
                 {
                     listObj.Add(item);
                 }
@@ -69,41 +81,41 @@ public class Database
         return listObj;
     }
 
-    public void UpdateTable(string name, object row)
+    public void UpdateTable(Entity name, object row)
     {
         switch (name)
         {
-            case "product":
+            case Entity.product:
                 Product product = row as Product;
-                for (int i = 0; i < productTable.Count; i++)
+                for (int i = 0; i < ProductTable.Count; i++)
                 {
-                    if (productTable[i].Id == product.Id)
+                    if (ProductTable[i].Id == product.Id)
                     {
-                        productTable[i] = product;
+                        ProductTable[i] = product;
                         return;
                     }
                 }
                 throw new ArgumentException("Product ko tồn tại");
 
-            case "category":
+            case Entity.category:
                 Category category = row as Category;
-                for (int i = 0; i < categoryTable.Count; i++)
+                for (int i = 0; i < CategoryTable.Count; i++)
                 {
-                    if (categoryTable[i].Id == category.Id)
+                    if (CategoryTable[i].Id == category.Id)
                     {
-                        categoryTable[i] = category;
+                        CategoryTable[i] = category;
                         return;
                     }
                 }
                 throw new ArgumentException("Category ko tồn tại");
 
-            case "accessotion":
+            case Entity.accessotion:
                 Accessotion accessotion = row as Accessotion;
-                for (int i = 0; i < accessotionTable.Count; i++)
+                for (int i = 0; i < AccessotionTable.Count; i++)
                 {
-                    if (accessotionTable[i].Id == accessotion.Id)
+                    if (AccessotionTable[i].Id == accessotion.Id)
                     {
-                        accessotionTable[i] = accessotion;
+                        AccessotionTable[i] = accessotion;
                         return;
                     }
                 }
@@ -114,66 +126,123 @@ public class Database
         }
     }
 
-    public void DeleteTable(string name, object row)
+    public bool DeleteTable(Entity name, object row)
     {
         switch (name)
         {
-            case "product":
+            case Entity.product:
                 Product product = row as Product;
-                for (int i = productTable.Count - 1; i >= 0; i--)
+                for (int i = ProductTable.Count - 1; i >= 0; i--)
                 {
-                    if (productTable[i].Id == product.Id)
+                    if (ProductTable[i].Id == product.Id)
                     {
-                        productTable.RemoveAt(i);
-                        return;
+                        ProductTable.RemoveAt(i);
+                        return true;
                     }
                 }
-                throw new ArgumentException("Product ko tồn tại");
+                return false;
 
-            case "category":
+            case Entity.category:
                 Category category = row as Category;
-                for (int i = categoryTable.Count - 1; i >= 0; i--)
+                for (int i = CategoryTable.Count - 1; i >= 0; i--)
                 {
-                    if (categoryTable[i].Id == category.Id)
+                    if (CategoryTable[i].Id == category.Id)
                     {
-                        categoryTable.RemoveAt(i);
-                        return;
+                        CategoryTable.RemoveAt(i);
+                        return true;
                     }
                 }
-                throw new ArgumentException("Category ko tồn tại");
+                return false;
 
-            case "accessotion":
+            case Entity.accessotion:
                 Accessotion accessotion = row as Accessotion;
-                for (int i = accessotionTable.Count - 1; i >= 0; i--)
+                for (int i = AccessotionTable.Count - 1; i >= 0; i--)
                 {
-                    if (accessotionTable[i].Id == accessotion.Id)
+                    if (AccessotionTable[i].Id == accessotion.Id)
                     {
-                        accessotionTable.RemoveAt(i);
-                        return;
+                        AccessotionTable.RemoveAt(i);
+                        return true;
                     }
                 }
-                throw new ArgumentException("Accessotion ko tồn tại");
+                return false;
 
+            default:
+                return false;
+        }
+    }
+
+    public void TruncateTable(Entity name)
+    {
+        switch (name)
+        {
+            case Entity.product:
+                ProductTable.Clear();
+                break;
+            case Entity.category:
+                CategoryTable.Clear();
+                break;
+            case Entity.accessotion:
+                AccessotionTable.Clear();
+                break;
             default:
                 throw new ArgumentException("Tên bảng ko đúng");
         }
     }
 
-    public void TruncateTable(string name)
+    public void UpdateTableById(int id, object row)
     {
-        switch (name)
+        
+        if(row is Product)
         {
-            case "product":
-                productTable.Clear();
-                break;
-            case "category":
-                categoryTable.Clear();
-                break;
-            case "accessotion":
-                accessotionTable.Clear();   
-                break;
-            default:
-                throw new ArgumentException("Tên bảng ko đúng");
+            Product product = row as Product;
+            for (int i = 0; i < ProductTable.Count; i++)
+            {
+                if (ProductTable[i].Id == id)
+                {
+                    ProductTable[i] = product;
+                    return;
+                }
+            }
+            throw new ArgumentException("Product ko tồn tại");
+        }else if (row is Category)
+        {
+            Category category = row as Category;
+            for (int i = CategoryTable.Count - 1; i >= 0; i--)
+            {
+                if (CategoryTable[i].Id == id)
+                {
+                    CategoryTable.RemoveAt(i);
+                    return;
+                }
+            }
+            throw new ArgumentException("Category ko tồn tại");
+        }
+        else if (row is Accessotion)
+        {
+            Accessotion accessotion = row as Accessotion;
+            for (int i = 0; i < AccessotionTable.Count; i++)
+            {
+                if (AccessotionTable[i].Id == id)
+                {
+                    AccessotionTable[i] = accessotion;
+                    return;
+                }
+            }
+            throw new ArgumentException("Accessotion ko tồn tại");
+        }
+        else
+        {
+            throw new ArgumentException("Bảng ko tồn tại");
+        }
+    }
+
+    public void initDatabase()
+    {
+        for (int i = 1; i <= 10; i++)
+        {
+            InsertTable(Entity.product, new Product(i, $"Product {i}", i));
+            InsertTable(Entity.category, new Category(i, $"Category {i}"));
+            InsertTable(Entity.accessotion, new Accessotion(i, $"Accessotion {i}"));
         }
     }
 }
