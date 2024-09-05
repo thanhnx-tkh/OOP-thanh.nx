@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.Generic; 
 
-public class AccessoryDAO
+public class AccessoryDAO : BaseDao<Accessotion>, IDao<Accessotion>
 {
     private Database db;
 
@@ -10,27 +10,27 @@ public class AccessoryDAO
         db = Database.Instance;
     }
 
-    public void Insert(Accessotion row)
+    public override void Insert(Accessotion row)
     {
         db.InsertTable(Entity.accessotion, row);
     }
 
-    public void Update(Accessotion row)
+    public override void Update(Accessotion row)
     {
         db.UpdateTable(Entity.accessotion, row);
     }
 
-    public bool Delete(Accessotion row)
+    public override bool Delete(Accessotion row)
     {
         return db.DeleteTable(Entity.accessotion, row);
     }
 
-    public List<BaseRow> FindAll()
+    public override List<BaseRow> FindAll()
     {
         return db.SelectTable(Entity.accessotion);
     }
 
-    public Accessotion FindById(int id)
+    public override Accessotion FindById(int id)
     {
         List<Accessotion> accessotions = FindAll().ConvertAll(obj => (Accessotion)obj);
         foreach (Accessotion accessotion in accessotions)

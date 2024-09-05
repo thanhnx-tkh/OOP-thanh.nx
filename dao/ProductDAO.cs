@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class ProductDAO
+public class ProductDAO : BaseDao<Product> , IDao<Product>
 {
     private Database db;
 
@@ -10,27 +10,27 @@ public class ProductDAO
         db = Database.Instance;
     }
 
-    public void Insert(Product row)
+    public override void Insert(Product row)
     {
         db.InsertTable(Entity.product, row);
     }
 
-    public void Update(Product row)
+    public override void Update(Product row)
     {
         db.UpdateTable(Entity.product, row);
     }
 
-    public bool Delete(Product row)
+    public override bool Delete(Product row)
     {
         return db.DeleteTable(Entity.product, row);
     }
 
-    public List<BaseRow> FindAll()
+    public override List<BaseRow> FindAll()
     {
         return db.SelectTable(Entity.product);
     }
 
-    public Product FindById(int id)
+    public override Product FindById(int id)
     {
         List<Product> products = FindAll().ConvertAll(obj => (Product)obj);
         foreach (Product product in products)

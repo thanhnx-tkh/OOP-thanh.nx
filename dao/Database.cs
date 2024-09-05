@@ -14,7 +14,9 @@ public class Database
     public List<Category> CategoryTable { get; set; } = new List<Category>();
     public List<Accessotion> AccessotionTable { get; set; } = new List<Accessotion>();
 
+
     private static Database instance;
+    private static readonly object padlock = new object();
 
     private Database() { }
 
@@ -22,11 +24,14 @@ public class Database
     {
         get
         {
-            if (instance == null)
+            lock (padlock)
             {
-                instance = new Database();
+                if (instance == null)
+                {
+                    instance = new Database();
+                }
+                return instance;
             }
-            return instance;
         }
     }
 
