@@ -48,11 +48,11 @@ public class DatabaseDemo
             db.InsertTable(Entity.accessotion, new Accessotion(i, $"Accessotion {i}"));
         }
     }
-    public void printTableTest(string name)
+    public void printTableTest(Entity name)
     {
         switch (name)
         {
-            case "product":
+            case Entity.product:
                 List<Product> products = db.SelectTable(Entity.product).ConvertAll(obj => (Product)obj);
 
                 foreach (var item in products)
@@ -62,7 +62,7 @@ public class DatabaseDemo
                     Console.WriteLine($"Product Category Id: {item.CategoryId}");
                 }
                 break;
-            case "category":
+            case Entity.category:
                 List<Category> categories = db.SelectTable(Entity.category).ConvertAll(obj => (Category)obj);
 
                 foreach (var item in categories)
@@ -71,7 +71,7 @@ public class DatabaseDemo
                     Console.WriteLine($"Category Name: {item.Name}");
                 }
                 break;
-            case "accessotion":
+            case Entity.accessotion:
                 List<Accessotion> accessotions = db.SelectTable(Entity.accessotion).ConvertAll(obj => (Accessotion)obj);
 
                 foreach (var item in accessotions)
@@ -86,11 +86,11 @@ public class DatabaseDemo
     }
     public void printAllTableTest()
     {
-        printTableTest("product");
+        printTableTest(Entity.product);
         Console.WriteLine("-------------------------------");
-        printTableTest("category");
+        printTableTest(Entity.category);
         Console.WriteLine("-------------------------------");
-        printTableTest("accessotion");
+        printTableTest(Entity.accessotion);
 
     }
 
