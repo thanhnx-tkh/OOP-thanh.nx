@@ -11,22 +11,30 @@ public class CategoryDaoDemo
         db = Database.Instance;
         db.InitDatabase();
     }
-
+    /// <summary>
+    /// Test insert data in the table category
+    /// </summary>
     public void InsertTest()
     {
         categoryDAO.Insert(new Category(11, "Product 11"));
     }
-
+    /// <summary>
+    /// Test update data in the table category
+    /// </summary>
     public void UpdateTest()
     {
         categoryDAO.Update(new Category(11, "Product 110000"));
     }
-
+    /// <summary>
+    /// Test delete data in the table category
+    /// </summary>
     public void DeleteTest()
     {
         categoryDAO.Delete(new Category(11, ""));
     }
-
+    /// <summary>
+    /// Test find all data table category
+    /// </summary>
     public void FindArrayTest()
     {
         List<BaseRow> categories = categoryDAO.FindAll();
@@ -36,7 +44,9 @@ public class CategoryDaoDemo
             Console.WriteLine($"category Name: {item.Name}");
         }
     }
-
+    /// <summary>
+    /// Test find product in the table by id
+    /// </summary>
     public void FindByIdTest()
     {
         Category category = categoryDAO.FindById(1);

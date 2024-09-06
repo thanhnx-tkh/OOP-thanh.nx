@@ -10,12 +10,16 @@ public class DatabaseDemo
         db = Database.Instance;
         InitDatabase();
     }
-
+    /// <summary>
+    /// Test insert data in the table
+    /// </summary>
     public void insertTableTest()
     {
         db.InsertTable(Entity.product, new Product(11, "Product 11", 1));
     }
-
+    /// <summary>
+    /// Test select data in the table
+    /// </summary>
     public void selectTableTest()
     {
         List<Product> products = db.SelectTable(Entity.product).ConvertAll(obj => (Product)obj);
@@ -26,22 +30,31 @@ public class DatabaseDemo
             Console.WriteLine($"Product Category Id: {item.CategoryId}");
         }
     }
-
+    /// <summary>
+    /// Test update data in the table
+    /// </summary>
     public void updateTableTest()
     {
         db.UpdateTableById(2, new Product(1, "Updated Product", 99));
     }
-
+    /// <summary>
+    /// Test delete data in the table
+    /// </summary>
     public void deleteTableTest()
     {
         db.DeleteTable(Entity.product, new Product { Id = 1 });
     }
-
+    /// <summary>
+    /// Test delete all data in the table by data type
+    /// </summary>
     public void truncateTableTest()
     {
         db.TruncateTable(Entity.product);
     }
 
+    /// <summary>
+    /// Init Database
+    /// </summary>
     public void InitDatabase()
     {
         for (int i = 1; i <= 10; i++)

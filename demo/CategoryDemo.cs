@@ -1,13 +1,20 @@
 ﻿using System;
 public class CategoryDemo
 {
+    /// <summary>
+    /// Create category
+    /// </summary>
+    /// <returns></returns>
     public Category CreateCategoryTest()
     {
         Category category = new Category(1, "Apple");
 
         return category;
     }
-
+    /// <summary>
+    /// print category
+    /// </summary>
+    /// <param name="category"></param>
     public void PrintCategory(Category category)
     {
         if (category == null)

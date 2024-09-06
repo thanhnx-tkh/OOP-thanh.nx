@@ -2,13 +2,20 @@
 
 public class AccessotionDemo
 {
+    /// <summary>
+    /// Create Accessotion
+    /// </summary>
+    /// <returns>Accessotion new</returns>
     public Accessotion CreateAccessotionTest()
     {
         Accessotion accessotion = new Accessotion(1, "Charger");
 
         return accessotion;
     }
-
+    /// <summary>
+    /// print accessotion
+    /// </summary>
+    /// <param name="accessotion"></param>
     public void PrintAccessotion(Accessotion accessotion)
     {
         if (accessotion == null)

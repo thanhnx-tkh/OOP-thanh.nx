@@ -7,7 +7,12 @@ public class Product : BaseRow
     public Product()
     {
     }
-
+    /// <summary>
+    /// Function initialize class 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="name"></param>
+    /// <param name="categoryId"></param>
     public Product(int id, string name, int categoryId)
     {
         this.Id = id;

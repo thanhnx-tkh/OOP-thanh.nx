@@ -11,22 +11,30 @@ public class ProductDaoDemo
         db = Database.Instance;
         db.InitDatabase();
     }
-
+    /// <summary>
+    /// Test insert data in the table product
+    /// </summary>
     public void InsertTest()
     {
         productDAO.Insert(new Product(11, "Product 11",1));
     }
-
+    /// <summary>
+    /// Test update data in the table product
+    /// </summary>
     public void UpdateTest()
     {
         productDAO.Update(new Product(11, "Product 11111111", 1));
     }
-
+    /// <summary>
+    /// Test delete data in the table product
+    /// </summary>
     public void DeleteTest()
     {
         productDAO.Delete(new Product(11, "", 0));
     }
-
+    /// <summary>
+    /// Test find all data table product
+    /// </summary>
     public void FindAllTest()
     {
         List<BaseRow> products = productDAO.FindAll();
@@ -38,6 +46,9 @@ public class ProductDaoDemo
         }
     }
 
+    /// <summary>
+    /// Test find data product in the table by id
+    /// </summary>
     public void FindByIdTest()
     {
         Product product = productDAO.FindById(1);
@@ -53,6 +64,9 @@ public class ProductDaoDemo
             Console.WriteLine("Không tìm thấy");
         }
     }
+    /// <summary>
+    /// Test find product in the table by name
+    /// </summary>
     public void FindByNameTest()
     {
         Product product = productDAO.FindByName("product 10");
@@ -68,7 +82,10 @@ public class ProductDaoDemo
             Console.WriteLine("Không tìm thấy");
         }
     }
-    public void FindSearchTest()
+    /// <summary>
+    /// Test find product in the table by character
+    /// </summary>
+    public void FindSearchTest()    
     {
         List<BaseRow> productsSearch = productDAO.Search("pro");
 
@@ -78,7 +95,10 @@ public class ProductDaoDemo
             Console.WriteLine($"product Name: {product.Name}");
         }
     }
-
+    /// <summary>
+    /// print table by data type 
+    /// </summary>
+    /// <param name="name">data type</param>
     public void printTableTest(Entity name)
     {
         switch (name)
@@ -112,7 +132,9 @@ public class ProductDaoDemo
                 throw new ArgumentException("Tên bảng ko đúng");
         }
     }
-
+    /// <summary>
+    /// print all table 
+    /// </summary>
     public void printAllTableTest()
     {
         printTableTest(Entity.product);
@@ -126,14 +148,14 @@ public class ProductDaoDemo
     public static void Main(string[] args)
     {
         ProductDaoDemo productDaoDemo = new ProductDaoDemo();
-        //productDaoDemo.InsertTest();
-        //productDaoDemo.UpdateTest();
-        //productDaoDemo.DeleteTest();
-        //productDaoDemo.FindAllTest();
-        //productDaoDemo.FindByIdTest();
-        //productDaoDemo.FindByNameTest();
-        //productDaoDemo.FindSearchTest();
-        //productDaoDemo.printAllTableTest();
+        productDaoDemo.InsertTest();
+        productDaoDemo.UpdateTest();
+        productDaoDemo.DeleteTest();
+        productDaoDemo.FindAllTest();
+        productDaoDemo.FindByIdTest();
+        productDaoDemo.FindByNameTest();
+        productDaoDemo.FindSearchTest();
+        productDaoDemo.printAllTableTest();
         Console.ReadLine();
     }
 }

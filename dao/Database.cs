@@ -35,6 +35,11 @@ public class Database
         }
     }
 
+    /// <summary>
+    /// Insert new BaseRow record into corresponding table
+    /// </summary>
+    /// <param name="name">Data type to be Insert</param>
+    /// <param name="row">The BaseRow object to be Insert</param>
     public void InsertTable(Entity name, BaseRow row)
     {
         switch (name)
@@ -53,6 +58,11 @@ public class Database
         }
     }
 
+    /// <summary>
+    /// Select BaseRow list according date type
+    /// </summary>
+    /// <param name="name">Data type to be Select</param>
+    /// <returns>BaseRow list</returns>
     public List<BaseRow> SelectTable(Entity name)
     {
         List<BaseRow> listObj = new List<BaseRow>();
@@ -73,6 +83,11 @@ public class Database
         return listObj;
     }
 
+    /// <summary>
+    /// Updates an existing BaseRow record in the  table.
+    /// </summary>
+    /// <param name="name">Data type to be update</param>
+    /// <param name="row">The BaseRow object to be update</param>
     public void UpdateTable(Entity name, BaseRow row)
     {
         switch (name)
@@ -117,7 +132,12 @@ public class Database
                 throw new ArgumentException("Tên bảng ko đúng");
         }
     }
-
+    /// <summary>
+    /// Delete an existing BaseRow record in the  table.
+    /// </summary>
+    /// <param name="name">Data type to be delete</param>
+    /// <param name="row">The BaseRow object to be delete</param>
+    /// <returns></returns>
     public bool DeleteTable(Entity name, BaseRow row)
     {
         switch (name)
@@ -162,7 +182,10 @@ public class Database
                 return false;
         }
     }
-
+    /// <summary>
+    /// Delete all data in the table 
+    /// </summary>
+    /// <param name="name">data type to be delete</param>
     public void TruncateTable(Entity name)
     {
         switch (name)
@@ -180,7 +203,11 @@ public class Database
                 throw new ArgumentException("Tên bảng ko đúng");
         }
     }
-
+    /// <summary>
+    /// Update a exsing BaseRow record in the table by id 
+    /// </summary>
+    /// <param name="id">BaseRow id to update</param>
+    /// <param name="row">The BaseRow object to update</param>
     public void UpdateTableById(int id, BaseRow row)
     {
         if (row is Product)
@@ -227,7 +254,9 @@ public class Database
             throw new ArgumentException("Bảng ko tồn tại");
         }
     }
-
+    /// <summary>
+    /// Init data in the all table
+    /// </summary>
     public void InitDatabase()
     {
         for (int i = 1; i <= 10; i++)

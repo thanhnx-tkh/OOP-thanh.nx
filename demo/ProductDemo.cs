@@ -1,13 +1,20 @@
 ﻿using System;
 public class ProductDemo
 {
+    /// <summary>
+    /// Create product
+    /// </summary>
+    /// <returns>product new</returns>
     public Product CreateProductTest()
     {
         Product product = new Product(1, "Iphone 15 promax", 1);
 
         return product;
     }
-
+    /// <summary>
+    /// print product
+    /// </summary>
+    /// <param name="product"></param>
     public void PrintProduct(Product product)
     {
         if (product == null)
